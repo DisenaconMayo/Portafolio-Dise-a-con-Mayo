@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Portafolio — Mayo</title>
+  <title>Portafolio Diseña Con Mayo</title>
+  <link rel="icon" type="image/png" href="img/Favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-
-  <!-- ═══════════════════════════════════════════════
-       PRELOAD — Animación del logo
-  ════════════════════════════════════════════════ -->
+<body> 
   <section class="preload" id="preload" aria-hidden="true">
   <div class="preload__contenedor">
     <div class="preload__logo">
@@ -28,12 +25,8 @@
       </svg>
     </div>
   </div>
-</section>
-
-  <!-- ═══════════════════════════════════════════════
-       LIBRETA — Contenedor principal
-  ════════════════════════════════════════════════ -->
-  <div class="libreta">
+</section> 
+  <div class="libreta efecto-desdoblar">
 
     <section class="hoja portada" id="portada">
 
@@ -99,9 +92,9 @@
       </div>
     </section>
 
-    </div><!-- /libreta -->
+    </div>
 
-    <section class="hoja flujo" id="flujo">
+    <section class="hoja flujo efecto-desdoblar" id="flujo">
 
       <img class="flujo__pata-deco" src="img/Pata.png" alt="Pata de gato" aria-hidden="true">
 
@@ -178,7 +171,7 @@
       </div>
     </section>
 
-    <section class="hoja conoce" id="conoce">
+    <section class="hoja conoce efecto-desdoblar" id="conoce">
       
       <div class="conoce__titulo">
         <span class="conoce__titulo-main">CONOCE MÁS</span>
@@ -212,7 +205,7 @@
 
     </section>
 
-    <section class="contacto-wrapper" id="contacto">
+    <section class="contacto-wrapper efecto-desdoblar" id="contacto">
       
       <div class="contacto__inner">
 
@@ -242,7 +235,7 @@
 
     </section>
 
-    <footer class="footer" id="footer">
+    <footer class="footer efecto-desdoblar" id="footer">
       
       <img src="img/Logo_Crema.png" alt="Logo Mayo" class="footer__logo">
 
@@ -254,9 +247,7 @@
       <img src="img/Pata_Rosadapng.png" alt="Garra" class="footer__pata" aria-hidden="true">
 
     </footer>
-  <!-- ═══════════════════════════════════════════════
-       SCRIPT — Preload + Animación libreta
-  ════════════════════════════════════════════════ -->
+
   <script>
   window.addEventListener("load", () => {
     const preload  = document.getElementById("preload");

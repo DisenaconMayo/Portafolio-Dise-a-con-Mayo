@@ -64,7 +64,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ─── PRELOAD ─────────────────────────────────────────────────────────────── */
 .preload {
   position: fixed;
   inset: 0;
@@ -180,7 +179,6 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── HOJAS — estado inicial (escondidas arriba) ───────────────────────── */
 .libreta,
 .hoja.flujo,
 .conoce-wrapper,
@@ -206,8 +204,6 @@ body {
   }
 }
 
-/* ─── LIBRETA WRAPPER ─────────────────────────────────────────────────────── */
-
 .libreta {
   max-width: 1100px;
   height: 1042px;
@@ -220,7 +216,6 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* ─── HOJA (base para todas las secciones) ───────────────────────────────── */
 .hoja {
   background: var(--color-niebla-marfil);
   border: var(--borde-libreta);
@@ -230,8 +225,6 @@ body {
   box-shadow: none;
 }
 
-
-/* Línea punteada entre hojas (costura de libreta) */
 .hoja + .hoja::before {
   content: '';
   display: block;
@@ -242,11 +235,10 @@ body {
   position: absolute;
   top: 0;
   left: 10%;
-  margin-bottom: -50px; /* Ajusta este valor: entre más negativo (ej: -70px), más sube la siguiente hoja */
+  margin-bottom: -50px;
   padding-bottom: 30px;
 }
 
-/* ─── SECCIÓN 1: PORTADA ─────────────────────────────────────────────────── */
 .portada {
   border-radius: 20px 20px 0 0;
   border-bottom: none;
@@ -254,7 +246,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end; /* Asegura que el texto se quede al fondo */
+  justify-content: flex-end;
 }
 
 .portada__patas {
@@ -268,18 +260,16 @@ body {
   z-index: 10;
 }
 
-/* Aplicamos el efecto a ambas patas */
 .portada__pata {
   width: 260px; 
   height: auto;
   object-fit: contain;
-  transform: rotate(180deg); /* Las pone hacia abajo */
-  mix-blend-mode: multiply; /* ESTA ES LA MAGIA: Vuelve transparente el fondo blanco */
+  transform: rotate(180deg);
+  mix-blend-mode: multiply;
 }
 
-/* Seleccionamos solo la pata izquierda (la primera) para hacerle el espejo */
 .portada__pata:first-child {
-  transform: rotate(180deg) scaleX(-1); /* Gira hacia abajo Y voltea en horizontal */
+  transform: rotate(180deg) scaleX(-1);
 }
 
 .portada__titulo { text-align: center; line-height: 1; }
@@ -310,7 +300,6 @@ body {
   top: 60px;
 }
 
-/* ─── SEPARADOR (El doblez de papel) ─────────────────────────────────────── */
 .separador-hojas {
   height: 40px;
   background: var(--color-niebla-marfil);
@@ -322,7 +311,6 @@ body {
   z-index: 2;
 }
 
-/* La línea de guiones largos */
 .separador-hojas::before {
   content: '';
   position: absolute;
@@ -331,7 +319,6 @@ body {
   background-image: repeating-linear-gradient(90deg, var(--color-negro), var(--color-negro) 35px, transparent 35px, transparent 75px);
 }
 
-/* Los huequitos a los lados (se ve el verde del fondo) */
 .corte-izq, .corte-der {
   position: absolute;
   width: 25px;
@@ -343,45 +330,37 @@ body {
 .corte-izq { left: -14px; border-left: none; }
 .corte-der { right: -14px; border-right: none; }
 
-/* ─── SECCIÓN 2: HOLA ────────────────────────────────────────────────────── */
 .hola {
   border-radius: 0 0 20px 20px; 
   border-top: none; 
   border-bottom: var(--borde-libreta); 
-  /* CAMBIO AQUÍ: Redujimos el 60px del final a 25px para quitar el espacio en blanco */
   padding: 40px 60px 0px; 
   margin-bottom: 0; 
 }
 
-
-/* Pestañas (Tabs) */
 .pestanas-laterales {
   position: absolute;
   right: -18px; 
   top: 40px; 
   display: flex;
   flex-direction: column;
-  /* ❌ Quitamos el gap para controlarlo nosotros mismos */
   z-index: -1; 
 }
 
 .pestana {
   width: 15px;
-  /* CAMBIO AQUÍ: Más alargadas (antes 70px) */
   height: 150px; 
   border: var(--borde-libreta);
   border-left: none; 
   border-radius: 0 15px 15px 0; 
   box-shadow: 2px 2px 0 var(--color-negro);
-  position: relative; /* Necesario para que se superpongan bien */
+  position: relative;
 }
 
-/* LA MAGIA: Hace que cada pestaña se suba un poco y se monte sobre la anterior */
 .pestana + .pestana {
   margin-top: -15px; 
 }
 
-/* Los 3 colores exactos de tu diseño */
 .pestana-magenta { background: var(--color-flor-magenta); z-index: 3; }
 .pestana-oscura  { background: var(--color-selva-negra); z-index: 2; }
 .pestana-marfil  { background: var(--color-niebla-marfil); z-index: 1; }
@@ -401,7 +380,7 @@ body {
   -webkit-text-stroke: 2px var(--color-negro);
   text-shadow: var(--sombra-brutalista);
   line-height: 1;
-  margin-bottom: -10px; /* Monta el texto sobre la foto */
+  margin-bottom: -10px;
   position: relative;
   z-index: 3;
   top: -29px;
@@ -436,14 +415,13 @@ body {
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--color-selva-negra);
-  text-align: right; /* Alineado a la derecha como el mockup */
+  text-align: right;
   margin-bottom: 40px;
   position: relative;
   top: -13px;
   left: -25px;
 }
 
-/* Caja Verde "Me considero" */
 .hola__caja-brutalista {
   position: relative;
   margin-top: 20px;
@@ -481,29 +459,23 @@ body {
   left: 155px;
 }
 
-/* ─── CORRECCIÓN DEL ESPACIO ENTRE HOJAS ────────────────────────────────── */
 .hola {
   border-radius: 0 0 20px 20px; 
   border-top: none; 
   border-bottom: var(--borde-libreta); 
   padding: 40px 60px 60px;
-  /* CAMBIO AQUÍ: Quitamos el margin-bottom de 30px y lo dejamos en 0 */
   margin-bottom: 0; 
 }
 
-/* Matamos cualquier línea punteada fantasma */
 .hoja + .hoja::before { 
   display: none !important; 
 }
 
-/* ─── SECCIÓN 3: FLUJO DE TRABAJO ───────────────────────────────────────── */
-/* ─── SECCIÓN 3: FLUJO DE TRABAJO ───────────────────────────────────────── */
 .flujo {
   max-width: 1064px;
   height: 550px;
-  margin: 0px auto 0 !important; /* Lo centramos y le damos separación (el hueco donde se ve el fondo oscuro) */
-  background: var(--color-niebla-marfil); /* Aseguramos su color de fondo */
-  border-radius: 20px;
+  margin: 0px auto 0 !important;
+  background: var(--color-niebla-marfil);
   border: var(--borde-libreta) !important;
   padding: 50px 50px 70px;
   position: relative;
@@ -512,7 +484,6 @@ body {
   top: -55px;
 }
 
-/* Pata entrando desde la izquierda, ARRIBA del texto */
 .flujo__pata-deco {
   position: absolute;
   top: -107px;
@@ -532,13 +503,9 @@ body {
   z-index: 1;
 }
 
-/* — Izquierda — */
 .flujo__izquierda {
-  /* CAMBIO AQUÍ: Empujamos el texto bastante hacia abajo para que quede DEBAJO de la pata, sin tocarla */
   padding-top: 80px; 
 }
-
-/* (El resto de clases .flujo__herramientas-intro, iconos, etc., se quedan igualitas) */
 
 .flujo__herramientas-intro {
   font-family: 'Satoshi-Bold', sans-serif;
@@ -576,12 +543,11 @@ body {
   color: white;
 }
 .icono-tool--ai { background: var(--color-flor-magenta); }
-.icono-tool--ps { background: var(--color-selva-negra); color: white; } /* Corregido a blanco */
+.icono-tool--ps { background: var(--color-selva-negra); color: white; }
 .icono-tool--id { background: var(--color-palma); }
 .icono-tool--figma { background: var(--color-flor-magenta); }
 .icono-tool--vscode { background: var(--color-palma); }
 
-/* Caja Brutalista de Estudios (Corregida para que no se corte) */
 .flujo__caja-wrapper {
   position: relative;
   margin-top: 66px;
@@ -602,7 +568,7 @@ body {
   padding: 0 10px;
   z-index: 2;
   letter-spacing: 0.5px;
-  white-space: nowrap; /* ¡Clave! Evita que el título se rompa en dos líneas */
+  white-space: nowrap;
 }
 .flujo__estudios-caja {
   border: 3px solid var(--color-palma);
@@ -619,7 +585,6 @@ body {
   font-weight: 800;
 }
 
-/* — Derecha (Pasos y Cola) — */
 .flujo__titulo-seccion {
   text-align: right;
   line-height: 1;
@@ -692,22 +657,21 @@ body {
   color: var(--color-selva-negra);
   line-height: 1.5;
 }
-/* ─── SECCIÓN 4: CONOCE MÁS DE MIS DISEÑOS ──────────────────────────────── */
+
 .conoce {
   max-width: 1064px;
   height: 550px;
-  margin: 0px auto 0 !important; /* Bloque independiente separado */
+  margin: 0px auto 0 !important;
   background: var(--color-niebla-marfil);
   border-radius: 20px;
   border: var(--borde-libreta) !important;
   padding: 50px 60px;
   position: relative;
-  overflow: hidden; /* Corta la cola del gato exactamente en el borde */
+  overflow: hidden;
   min-height: 450px;
   top: -58px;
 }
 
-/* ─── TÍTULO CENTRAL ────────────────────────────────────────────────────── */
 .conoce__titulo {
   position: absolute;
   top: 50%;
@@ -740,7 +704,6 @@ body {
   margin-top: -22px;
 }
 
-/* ─── GRILLA DE TARJETAS ────────────────────────────────────────────────── */
 .conoce__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -750,13 +713,11 @@ body {
   z-index: 2;
 }
 
-/* ─── FORMA DE LAS TARJETAS (TAGS) ──────────────────────────────────────── */
 .tag {
   width: 100%;
   max-width: 260px;
   height: 160px;
   border: var(--borde-libreta);
-  /* LA MAGIA: top-left, top-right, bottom-right (súper curva), bottom-left */
   border-radius: 15px 15px 80px 15px; 
   position: relative;
   display: flex;
@@ -767,12 +728,11 @@ body {
   font-weight: 700;
   font-size: 2.5rem;
   color: white;
-  padding-top: 20px; /* Empuja un poco el texto hacia abajo por el hueco */
+  padding-top: 20px;
 }
 
-/* Alineación para que se peguen a los bordes de la libreta */
-.tag:nth-child(odd) { justify-self: start; }  /* Izquierda */
-.tag:nth-child(even) { justify-self: end; }   /* Derecha */
+.tag:nth-child(odd) { justify-self: start; }
+.tag:nth-child(even) { justify-self: end; }
 
 /* Los colores de cada tarjeta */
 .tag--vacio    { background: var(--color-niebla-marfil); }
@@ -780,7 +740,6 @@ body {
 .tag--web      { background: var(--color-selva-negra); }
 .tag--grafico  { background: var(--color-palma); }
 
-/* ─── HUEQUITOS DE LAS TARJETAS ─────────────────────────────────────────── */
 .tag__huequito {
   position: absolute;
   top: 15px;
@@ -792,13 +751,11 @@ body {
   border: var(--borde-libreta);
 }
 
-/* Colores de cada huequito según el mockup */
 .tag__huequito--magenta { background: var(--color-flor-magenta); }
 .tag__huequito--verde   { background: var(--color-palma); }
 .tag__huequito--blanco  { background: var(--color-niebla-marfil); }
 .tag__huequito--oscuro  { background: var(--color-selva-negra); }
 
-/* ─── COLA DEL GATO ─────────────────────────────────────────────────────── */
 .conoce__cola {
   position: absolute;
   bottom: -69px;
@@ -806,12 +763,11 @@ body {
   transform: translateX(-50%);
   width: 300px;
   height: auto;
-  mix-blend-mode: multiply; 
+  mix-blend-mode: multiply;
   z-index: 1;
   pointer-events: none;
 }
 
-/* ─── SECCIÓN 5: CONTACTO ───────────────────────────────────────────────── */
 .contacto-wrapper {
   max-width: 1064px;
   height: 550px;
@@ -821,7 +777,7 @@ body {
   background-size: 800px;
   border: var(--borde-libreta);
   border-radius: 30px;
-  padding: 45px; 
+  padding: 45px;
   position: relative;
   overflow: hidden;
   top: -61px;
@@ -843,8 +799,7 @@ body {
   overflow: hidden; 
   min-height: 320px;
 }
- 
-/* — Izquierda (Textos y Gato) — */
+
 .contacto__texto-gato {
   position: relative;
   z-index: 2;
@@ -870,17 +825,15 @@ body {
   display: block;
   line-height: 1.2;
 }
- 
-/* LA MAGIA DEL GATO: se posiciona al final de la columna izquierda */
+
 .contacto__imagenes {
   display: flex;
   align-items: flex-end;
-  gap: 0px; /* Cola pegada a la cabeza */
-  margin-top: auto; /* Empuja el gato hacia abajo */
+  gap: 0px;
+  margin-top: auto;
   padding-top: 10px;
   position: relative;
-  z-index: 1;
-  /* Sacamos el gato del borde inferior del contenedor */
+  z-index: 1; 
   margin-bottom: -2px;
 }
  
@@ -891,7 +844,7 @@ body {
 .gato-cola {
   width: 300px;
   height: auto;
-  margin-right: -5px; /* Solapa levemente con la cabeza */
+  margin-right: -5px;
   margin-bottom: 0;
   position: absolute;
   bottom: -291px;
@@ -919,12 +872,11 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
- 
-/* Inputs y Textareas */
+
 .form__campo {
   width: 100%;
   background: transparent;
-  border: 2.5px solid var(--color-palma); /* Borde verde */
+  border: 2.5px solid var(--color-palma);
   border-radius: 12px;
   padding: 12px 16px;
   font-family: 'Satoshi-Medium', sans-serif;
@@ -932,8 +884,7 @@ body {
   color: var(--color-selva-negra);
   outline: none;
   resize: none;
-  /* SOMBRA BRUTALISTA PARA LOS INPUTS */
-  box-shadow: 3px 3px 0 var(--color-selva-negra); 
+  box-shadow: 3px 3px 0 var(--color-selva-negra);
   transition: transform 0.1s, box-shadow 0.1s;
 }
 .form__campo::placeholder { 
@@ -948,8 +899,7 @@ body {
  
 .form__campo--area { min-height: 80px; }
 .form__campo--area2 { min-height: 80px; }
- 
-/* Botón Iniciar Conversación */
+
 .form__boton {
   background: var(--color-flor-magenta);
   color: white;
@@ -1011,10 +961,10 @@ body {
 
 .footer__pata {
   position: absolute;
-  right: -42px; /* Pegada al borde derecho (ajústalo en negativo si quieres que entre menos) */
+  right: -42px;
   top: -61px;
-  transform: translateY(-50%); /* La centra verticalmente perfecta */
-  width: 280px; /* Ajusta el tamaño de la garra rosa */
+  transform: translateY(-50%);
+  width: 280px;
   height: auto;
   z-index: 1;
   pointer-events: none;
