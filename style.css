@@ -1,0 +1,1022 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+/* ─── FONT FACES ─────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('fonts//Satoshi-Medium.woff2') format('woff2'),
+       url('fonts//Satoshi-Medium.woff') format('woff'),
+       url('fonts//Satoshi-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src: url('fonts//Satoshi-Bold.woff2') format('woff2'),
+       url('fonts//Satoshi-Bold.woff') format('woff'),
+       url('fonts//Satoshi-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('fonts//Satoshi-Black.woff2') format('woff2'),
+       url('fonts//Satoshi-Black.woff') format('woff'),
+       url('fonts//Satoshi-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  --color-selva-negra:   rgb(30,  57,  9);
+  --color-palma:         rgb(132, 154, 40);
+  --color-flor-magenta:  rgb(227, 50,  96);
+  --color-niebla-marfil: #efeae6;
+  --color-negro-grisaceo:rgb(29,  29,  29);
+  --color-negro:         rgb(0,   0,   0);
+
+ 
+  --borde-libreta: 3px solid var(--color-negro);
+  --sombra-brutalista: 2px 2px 0px var(--color-negro); 
+
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-3xl: 2rem;     /* 32px */
+  --text-4xl: 3rem;     /* 48px */
+  --text-5xl: 3.25rem;  /* 52px */
+  --text-6xl: 5rem;    /* 80px */
+
+  --radius: 25px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-negro-grisaceo);
+  font-family: 'Satoshi-Medium', sans-serif;
+  color: var(--color-negro-grisaceo);
+  overflow-x: hidden;
+}
+
+/* ─── PRELOAD ─────────────────────────────────────────────────────────────── */
+.preload {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+.preload--hidden {
+  transform: translateY(-60%) rotateX(90deg) scale(2.5);
+  pointer-events: none;
+}
+
+.preload__contenedor {
+  width: 100%;
+  max-width: 1064px;
+  height: 550px;
+  background-color: var(--color-palma);
+  border-radius: 20px;
+  border: 3px solid var(--color-negro);
+  box-shadow: 4px 4px 0px var(--color-negro);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  perspective-origin: 50% 0%;
+}
+
+.preload--expandir .preload__contenedor {
+  transform: scale(2.5);
+  border-radius: 0;
+  transition: transform 0.5s cubic-bezier(0.55, 0, 1, 0.45),
+              border-radius 0.5s ease;
+}
+
+.preload__contenedor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('img/Patron.png');
+  background-size: 800px;
+  opacity: 10%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.preload__logo {
+  width: 350px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.logo-svg path {
+  fill-opacity: 0;
+  stroke: var(--color-niebla-marfil);
+  stroke-width: 1.5;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+
+#isotipo {
+  animation: drawPath 2.5s ease-out forwards;
+}
+
+#texto1 {
+  stroke: var(--color-niebla-marfil);
+  animation: drawPath 1.5s ease-out forwards;
+  animation-delay: 1s;
+}
+
+#texto2 {
+  stroke: var(--color-flor-magenta);
+  animation: drawPath 1.5s ease-out forwards;
+  animation-delay: 1s;
+}
+
+@keyframes drawPath {
+  0%   { stroke-dashoffset: 2000; fill-opacity: 0; }
+  70%  { fill-opacity: 0; }
+  100% { stroke-dashoffset: 0; fill-opacity: 1; }
+}
+
+.libreta,
+.hoja.flujo,
+.conoce-wrapper,
+.contacto-wrapper,
+.footer {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.hoja-visible {
+  animation: caerHoja 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes caerHoja {
+  from { opacity: 0; transform: translateY(-40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HOJAS — estado inicial (escondidas arriba) ───────────────────────── */
+.libreta,
+.hoja.flujo,
+.conoce-wrapper,
+.contacto-wrapper,
+.footer {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+/* Estado visible con bounce */
+.hoja-visible {
+  animation: caerHoja 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes caerHoja {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── LIBRETA WRAPPER ─────────────────────────────────────────────────────── */
+
+.libreta {
+  max-width: 1100px;
+  height: 1042px;
+  margin: 50px auto;
+  background: var(--color-palma);
+  border: var(--borde-libreta);
+  border-radius: 35px;
+  padding: 12px 15px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ─── HOJA (base para todas las secciones) ───────────────────────────────── */
+.hoja {
+  background: var(--color-niebla-marfil);
+  border: var(--borde-libreta);
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  box-shadow: none;
+}
+
+
+/* Línea punteada entre hojas (costura de libreta) */
+.hoja + .hoja::before {
+  content: '';
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  border-top: 2.5px dashed var(--color-palma);
+  opacity: 0.55;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  margin-bottom: -50px; /* Ajusta este valor: entre más negativo (ej: -70px), más sube la siguiente hoja */
+  padding-bottom: 30px;
+}
+
+/* ─── SECCIÓN 1: PORTADA ─────────────────────────────────────────────────── */
+.portada {
+  border-radius: 20px 20px 0 0;
+  border-bottom: none;
+  padding: 160px 20px 160px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Asegura que el texto se quede al fondo */
+}
+
+.portada__patas {
+  position: absolute;
+  top: -38px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 80px; 
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Aplicamos el efecto a ambas patas */
+.portada__pata {
+  width: 260px; 
+  height: auto;
+  object-fit: contain;
+  transform: rotate(180deg); /* Las pone hacia abajo */
+  mix-blend-mode: multiply; /* ESTA ES LA MAGIA: Vuelve transparente el fondo blanco */
+}
+
+/* Seleccionamos solo la pata izquierda (la primera) para hacerle el espejo */
+.portada__pata:first-child {
+  transform: rotate(180deg) scaleX(-1); /* Gira hacia abajo Y voltea en horizontal */
+}
+
+.portada__titulo { text-align: center; line-height: 1; }
+
+.portada__bienvenida {
+  font-family: 'Satoshi-Black', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: var(--color-flor-magenta);
+  text-transform: uppercase;
+  display: block;
+  -webkit-text-stroke: 2px var(--color-negro);
+  text-shadow: var(--sombra-brutalista);
+  position: relative;
+  top: 60px;
+}
+
+.portada__subtitulo {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-palma);
+  text-transform: uppercase;
+  display: block;
+  -webkit-text-stroke: 2px var(--color-negro);
+  text-shadow: var(--sombra-brutalista);
+  position: relative;
+  top: 60px;
+}
+
+/* ─── SEPARADOR (El doblez de papel) ─────────────────────────────────────── */
+.separador-hojas {
+  height: 40px;
+  background: var(--color-niebla-marfil);
+  border-left: var(--borde-libreta);
+  border-right: var(--borde-libreta);
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+/* La línea de guiones largos */
+.separador-hojas::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-image: repeating-linear-gradient(90deg, var(--color-negro), var(--color-negro) 35px, transparent 35px, transparent 75px);
+}
+
+/* Los huequitos a los lados (se ve el verde del fondo) */
+.corte-izq, .corte-der {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: var(--color-palma);
+  border: var(--borde-libreta);
+  border-radius: 50%;
+}
+.corte-izq { left: -14px; border-left: none; }
+.corte-der { right: -14px; border-right: none; }
+
+/* ─── SECCIÓN 2: HOLA ────────────────────────────────────────────────────── */
+.hola {
+  border-radius: 0 0 20px 20px; 
+  border-top: none; 
+  border-bottom: var(--borde-libreta); 
+  /* CAMBIO AQUÍ: Redujimos el 60px del final a 25px para quitar el espacio en blanco */
+  padding: 40px 60px 0px; 
+  margin-bottom: 0; 
+}
+
+
+/* Pestañas (Tabs) */
+.pestanas-laterales {
+  position: absolute;
+  right: -18px; 
+  top: 40px; 
+  display: flex;
+  flex-direction: column;
+  /* ❌ Quitamos el gap para controlarlo nosotros mismos */
+  z-index: -1; 
+}
+
+.pestana {
+  width: 15px;
+  /* CAMBIO AQUÍ: Más alargadas (antes 70px) */
+  height: 150px; 
+  border: var(--borde-libreta);
+  border-left: none; 
+  border-radius: 0 15px 15px 0; 
+  box-shadow: 2px 2px 0 var(--color-negro);
+  position: relative; /* Necesario para que se superpongan bien */
+}
+
+/* LA MAGIA: Hace que cada pestaña se suba un poco y se monte sobre la anterior */
+.pestana + .pestana {
+  margin-top: -15px; 
+}
+
+/* Los 3 colores exactos de tu diseño */
+.pestana-magenta { background: var(--color-flor-magenta); z-index: 3; }
+.pestana-oscura  { background: var(--color-selva-negra); z-index: 2; }
+.pestana-marfil  { background: var(--color-niebla-marfil); z-index: 1; }
+
+.hola__inner {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+
+.hola__titulo-hola {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 5.5rem;
+  color: var(--color-flor-magenta);
+  -webkit-text-stroke: 2px var(--color-negro);
+  text-shadow: var(--sombra-brutalista);
+  line-height: 1;
+  margin-bottom: -10px; /* Monta el texto sobre la foto */
+  position: relative;
+  z-index: 3;
+  top: -29px;
+}
+
+.hola__foto-wrap {
+  width: 260px;
+  aspect-ratio: 3/4;
+  border-radius: 15px;
+  overflow: hidden;
+  border: var(--borde-libreta);
+  box-shadow: var(--sombra-brutalista);
+  position: absolute;
+  top: 73px;
+  left: 89px;
+}
+.hola__foto { width: 100%; height: 100%; object-fit: cover; }
+
+.hola__derecha { padding-top: 30px; }
+.hola__nombre {
+  font-family: 'Satoshi-Bold', sans-serif;
+  font-size: 1.2rem;
+  color: var(--color-selva-negra);
+  margin-bottom: 20px;
+  text-align: right;
+  position: relative;
+  left: -25px;
+  top: -20px;
+}
+.hola__descripcion {
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-selva-negra);
+  text-align: right; /* Alineado a la derecha como el mockup */
+  margin-bottom: 40px;
+  position: relative;
+  top: -13px;
+  left: -25px;
+}
+
+/* Caja Verde "Me considero" */
+.hola__caja-brutalista {
+  position: relative;
+  margin-top: 20px;
+}
+.hola__me-considero-label {
+  position: absolute;
+  top: -32px;
+  right: 45px;
+  font-family: 'Satoshi-Bold', sans-serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: white;
+  z-index: 3;
+  text-shadow: 
+    -1.5px -1.5px 0 var(--color-negro),  
+     1.5px -1.5px 0 var(--color-negro),
+    -1.5px  1.5px 0 var(--color-negro),
+     1.5px  1.5px 0 var(--color-negro),
+     3px 3px 0 var(--color-negro); 
+}
+.hola__tags {
+  width: fit-content;
+  background: var(--color-palma);
+  border: var(--borde-libreta);
+  border-radius: 15px;
+  padding: 20px 30px 20px;
+  color: white;
+  font-family: 'Satoshi-Bold', sans-serif;
+  font-size: 1.125rem;
+  text-align: center;
+  line-height: 1.5;
+  box-shadow: var(--sombra-brutalista);
+  position: relative;
+  top: -13px;
+  left: 155px;
+}
+
+/* ─── CORRECCIÓN DEL ESPACIO ENTRE HOJAS ────────────────────────────────── */
+.hola {
+  border-radius: 0 0 20px 20px; 
+  border-top: none; 
+  border-bottom: var(--borde-libreta); 
+  padding: 40px 60px 60px;
+  /* CAMBIO AQUÍ: Quitamos el margin-bottom de 30px y lo dejamos en 0 */
+  margin-bottom: 0; 
+}
+
+/* Matamos cualquier línea punteada fantasma */
+.hoja + .hoja::before { 
+  display: none !important; 
+}
+
+/* ─── SECCIÓN 3: FLUJO DE TRABAJO ───────────────────────────────────────── */
+/* ─── SECCIÓN 3: FLUJO DE TRABAJO ───────────────────────────────────────── */
+.flujo {
+  max-width: 1064px;
+  height: 550px;
+  margin: 0px auto 0 !important; /* Lo centramos y le damos separación (el hueco donde se ve el fondo oscuro) */
+  background: var(--color-niebla-marfil); /* Aseguramos su color de fondo */
+  border-radius: 20px;
+  border: var(--borde-libreta) !important;
+  padding: 50px 50px 70px;
+  position: relative;
+  overflow: hidden; 
+  box-shadow: none; 
+  top: -55px;
+}
+
+/* Pata entrando desde la izquierda, ARRIBA del texto */
+.flujo__pata-deco {
+  position: absolute;
+  top: -107px;
+  left: -75px;
+  width: 350px;
+  transform: rotate(90deg) scaleX(-1); 
+  mix-blend-mode: multiply; 
+  z-index: 10;
+  pointer-events: none;
+}
+
+.flujo__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; 
+  gap: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+/* — Izquierda — */
+.flujo__izquierda {
+  /* CAMBIO AQUÍ: Empujamos el texto bastante hacia abajo para que quede DEBAJO de la pata, sin tocarla */
+  padding-top: 80px; 
+}
+
+/* (El resto de clases .flujo__herramientas-intro, iconos, etc., se quedan igualitas) */
+
+.flujo__herramientas-intro {
+  font-family: 'Satoshi-Bold', sans-serif;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--color-selva-negra);
+  margin-bottom: 16px;
+  margin-left: 12px;
+}
+.flujo__herramientas-intro em {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--color-flor-magenta);
+  font-weight: 900;
+}
+
+.flujo__iconos {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 0px;
+  position: absolute;
+  top: 194px;
+  left: 10px;
+}
+
+.icono-tool {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Satoshi-Black', sans-serif;
+  font-size: 1.3rem;
+  color: white;
+}
+.icono-tool--ai { background: var(--color-flor-magenta); }
+.icono-tool--ps { background: var(--color-selva-negra); color: white; } /* Corregido a blanco */
+.icono-tool--id { background: var(--color-palma); }
+.icono-tool--figma { background: var(--color-flor-magenta); }
+.icono-tool--vscode { background: var(--color-palma); }
+
+/* Caja Brutalista de Estudios (Corregida para que no se corte) */
+.flujo__caja-wrapper {
+  position: relative;
+  margin-top: 66px;
+  margin-left: 9px;
+  top: 74px;
+  width: 400px; 
+}
+.flujo__estudios-titulo {
+  position: absolute;
+  top: -18px;
+  left: 20px;
+  font-family: 'Satoshi-Black', sans-serif;
+  font-size: 1.6rem;
+  color: var(--color-flor-magenta);
+  -webkit-text-stroke: 1.5px var(--color-negro);
+  text-shadow: 2px 2px 0 var(--color-negro); 
+  background: var(--color-niebla-marfil); 
+  padding: 0 10px;
+  z-index: 2;
+  letter-spacing: 0.5px;
+  white-space: nowrap; /* ¡Clave! Evita que el título se rompa en dos líneas */
+}
+.flujo__estudios-caja {
+  border: 3px solid var(--color-palma);
+  border-radius: 20px;
+  padding: 25px 25px 25px;
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 1rem;
+  color: var(--color-selva-negra);
+  line-height: 1.6;
+  width: 100%; 
+}
+.flujo__estudios-caja strong { 
+  font-family: 'Playfair Display', serif; 
+  font-weight: 800;
+}
+
+/* — Derecha (Pasos y Cola) — */
+.flujo__titulo-seccion {
+  text-align: right;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+.flujo__titulo-main {
+  font-family: 'Satoshi-Black', sans-serif;
+  font-size: 3.25rem;
+  color: var(--color-flor-magenta);
+  -webkit-text-stroke: 1.5px var(--color-negro);
+  text-shadow: var(--sombra-brutalista);
+  display: block;
+  text-align: center;
+}
+.flujo__titulo-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 3.25rem;
+  color: var(--color-selva-negra);
+  display: block;
+  margin-top: -25px;
+  position: absolute;
+  right: 66px;
+}
+
+.flujo__pasos-wrapper {
+  position: relative;
+  padding: 10px 0;
+  top: 13px;
+  right: 13px;
+}
+.flujo__cola-deco {
+  position: absolute;
+  top: -10px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 105%;
+  width: auto;
+  mix-blend-mode: multiply; 
+  z-index: 0;
+  pointer-events: none;
+}
+.flujo__pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1; 
+}
+.paso {
+  background: var(--color-niebla-marfil);
+  border: 3px solid var(--color-palma);
+  box-shadow: 2px 2px 0px var(--color-palma);
+  border-radius: 25px;
+  padding: 15px 25px;
+}
+.paso__num-titulo {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-selva-negra);
+  margin-bottom: 5px;
+}
+.paso__descripcion {
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 0.95rem;
+  color: var(--color-selva-negra);
+  line-height: 1.5;
+}
+/* ─── SECCIÓN 4: CONOCE MÁS DE MIS DISEÑOS ──────────────────────────────── */
+.conoce {
+  max-width: 1064px;
+  height: 550px;
+  margin: 0px auto 0 !important; /* Bloque independiente separado */
+  background: var(--color-niebla-marfil);
+  border-radius: 20px;
+  border: var(--borde-libreta) !important;
+  padding: 50px 60px;
+  position: relative;
+  overflow: hidden; /* Corta la cola del gato exactamente en el borde */
+  min-height: 450px;
+  top: -58px;
+}
+
+/* ─── TÍTULO CENTRAL ────────────────────────────────────────────────────── */
+.conoce__titulo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 5;
+  width: 100%;
+  line-height: 1;
+}
+
+.conoce__titulo-main {
+  font-family: 'Satoshi-Black', sans-serif;
+  font-size: 3.5rem;
+  color: var(--color-flor-magenta);
+  text-transform: uppercase;
+  display: block;
+  -webkit-text-stroke: 2px var(--color-negro);
+  text-shadow: var(--sombra-brutalista);
+  letter-spacing: 0px;
+}
+
+.conoce__titulo-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 3.25rem;
+  color: var(--color-selva-negra);
+  display: block;
+  margin-top: -22px;
+}
+
+/* ─── GRILLA DE TARJETAS ────────────────────────────────────────────────── */
+.conoce__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  gap: 120px 60px; 
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── FORMA DE LAS TARJETAS (TAGS) ──────────────────────────────────────── */
+.tag {
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  border: var(--borde-libreta);
+  /* LA MAGIA: top-left, top-right, bottom-right (súper curva), bottom-left */
+  border-radius: 15px 15px 80px 15px; 
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: white;
+  padding-top: 20px; /* Empuja un poco el texto hacia abajo por el hueco */
+}
+
+/* Alineación para que se peguen a los bordes de la libreta */
+.tag:nth-child(odd) { justify-self: start; }  /* Izquierda */
+.tag:nth-child(even) { justify-self: end; }   /* Derecha */
+
+/* Los colores de cada tarjeta */
+.tag--vacio    { background: var(--color-niebla-marfil); }
+.tag--editorial{ background: var(--color-flor-magenta); }
+.tag--web      { background: var(--color-selva-negra); }
+.tag--grafico  { background: var(--color-palma); }
+
+/* ─── HUEQUITOS DE LAS TARJETAS ─────────────────────────────────────────── */
+.tag__huequito {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: var(--borde-libreta);
+}
+
+/* Colores de cada huequito según el mockup */
+.tag__huequito--magenta { background: var(--color-flor-magenta); }
+.tag__huequito--verde   { background: var(--color-palma); }
+.tag__huequito--blanco  { background: var(--color-niebla-marfil); }
+.tag__huequito--oscuro  { background: var(--color-selva-negra); }
+
+/* ─── COLA DEL GATO ─────────────────────────────────────────────────────── */
+.conoce__cola {
+  position: absolute;
+  bottom: -69px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: auto;
+  mix-blend-mode: multiply; 
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ─── SECCIÓN 5: CONTACTO ───────────────────────────────────────────────── */
+.contacto-wrapper {
+  max-width: 1064px;
+  height: 550px;
+  margin: 0px auto;
+  background-color: var(--color-palma);
+  background-image: url('img/Patron.png');
+  background-size: 800px;
+  border: var(--borde-libreta);
+  border-radius: 30px;
+  padding: 45px; 
+  position: relative;
+  overflow: hidden;
+  top: -61px;
+}
+ 
+.contacto__inner {
+  width: 950px;
+  height: 420px;
+  background: var(--color-niebla-marfil);
+  border-radius: 20px;
+  border: var(--borde-libreta);
+  box-shadow: 4px 4px 0 var(--color-negro); 
+  padding: 40px 50px 20px 45px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 31px;
+  align-items: start;
+  position: relative;
+  overflow: hidden; 
+  min-height: 320px;
+}
+ 
+/* — Izquierda (Textos y Gato) — */
+.contacto__texto-gato {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+ 
+.contacto__frase {
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 1.4rem;
+  color: var(--color-selva-negra);
+  line-height: 1.5;
+  margin-bottom: 5px;
+  position: relative;
+  top: 20px;
+}
+.contacto__frase em {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 790;
+  font-size: 1.5rem;
+  display: block;
+  line-height: 1.2;
+}
+ 
+/* LA MAGIA DEL GATO: se posiciona al final de la columna izquierda */
+.contacto__imagenes {
+  display: flex;
+  align-items: flex-end;
+  gap: 0px; /* Cola pegada a la cabeza */
+  margin-top: auto; /* Empuja el gato hacia abajo */
+  padding-top: 10px;
+  position: relative;
+  z-index: 1;
+  /* Sacamos el gato del borde inferior del contenedor */
+  margin-bottom: -2px;
+}
+ 
+.gato-cola, .gato-cabeza {
+  mix-blend-mode: multiply; 
+  pointer-events: none;
+}
+.gato-cola {
+  width: 300px;
+  height: auto;
+  margin-right: -5px; /* Solapa levemente con la cabeza */
+  margin-bottom: 0;
+  position: absolute;
+  bottom: -291px;
+  left: -92px;
+}
+.gato-cabeza {
+  width: 320px; 
+  height: auto;
+  position: absolute;
+  bottom: -294px;
+  left: 113px;
+}
+ 
+.contacto__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 40px;
+}
+ 
+.form__fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+ 
+/* Inputs y Textareas */
+.form__campo {
+  width: 100%;
+  background: transparent;
+  border: 2.5px solid var(--color-palma); /* Borde verde */
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 0.95rem;
+  color: var(--color-selva-negra);
+  outline: none;
+  resize: none;
+  /* SOMBRA BRUTALISTA PARA LOS INPUTS */
+  box-shadow: 3px 3px 0 var(--color-selva-negra); 
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.form__campo::placeholder { 
+  color: var(--color-selva-negra); 
+  opacity: 0.8; 
+}
+.form__campo:focus { 
+  border-color: var(--color-selva-negra); 
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-selva-negra);
+}
+ 
+.form__campo--area { min-height: 80px; }
+.form__campo--area2 { min-height: 80px; }
+ 
+/* Botón Iniciar Conversación */
+.form__boton {
+  background: var(--color-flor-magenta);
+  color: white;
+  border: 3px solid var(--color-negro);
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.35rem;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 5px 5px 0 var(--color-negro); 
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  transition: transform 0.1s, box-shadow 0.1s;
+  white-space: nowrap;
+}
+ 
+.form__boton:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--color-negro);
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+.footer {
+  max-width: 1064px; /* El mismo ancho de todas las tarjetas sueltas */
+  margin: 0px auto; /* Lo separamos de la sección de contacto */
+  margin-bottom: 50px;
+  background: var(--color-selva-negra);
+  border: var(--borde-libreta);
+  border-radius: 30px;
+  padding: 7px 36px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Guillotina la pata rosa para que no se salga */
+  /* Sombra brutalista para mantener consistencia con las otras hojas */
+  top: -65px;
+}
+
+.footer__logo {
+  width: 150px;
+  height: auto;
+  z-index: 2;
+}
+
+.footer__copy {
+  font-family: 'Satoshi-Bold', sans-serif;
+  font-size: 1rem;
+  color: var(--color-niebla-marfil);
+  text-align: center;
+  line-height: 1.6;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer__pata {
+  position: absolute;
+  right: -42px; /* Pegada al borde derecho (ajústalo en negativo si quieres que entre menos) */
+  top: -61px;
+  transform: translateY(-50%); /* La centra verticalmente perfecta */
+  width: 280px; /* Ajusta el tamaño de la garra rosa */
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(-90deg);
+}
